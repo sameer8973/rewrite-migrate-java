@@ -1,0 +1,15 @@
+String pyNote = tools.getParamValue("pyNote");
+pyNote = pega_rules_string.whatComesBeforeLast(pyNote,'.');
+boolean propExists = false;
+try{
+  if(myStepPage.getIfPresent(pyNote) != null){
+    propExists = true;
+  }
+}catch(Exception e){
+  oLog.error("Exception checking if Property exists"+e);
+}
+if(propExists){
+  myStepPage.getProperty("pyTransientAttachRef").setValue(pyNote);
+}else{
+  myStepPage.getProperty("pyTransientAttachRef").setValue("");
+}
