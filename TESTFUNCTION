@@ -1,0 +1,2 @@
+AppURL = pega_rules_utilities.getDataSystemSetting("DRS","EmailAppURL");
+AssignURL = pega_rules_utilities.getDataSystemSetting("DRS","EmailAssignmentURL");
