@@ -1,0 +1,36 @@
+String server = "cfhzpb4z7zeso.uksouth.azurecontainer.io";
+int port = 22;
+String user = "bbrsbix";
+String pass = "Vane5ub7joSa6txT5ecr";
+
+oLog.debug("Test");
+
+
+FTPClient ftpClient = new FTPClient();
+    try {
+        ftpClient.connect(server, port);
+        int replyCode = ftpClient.getReplyCode();
+        if (!FTPReply.isPositiveCompletion(replyCode)) {
+            System.out.println("Operation failed. Server reply code: " + replyCode);
+            return;
+        }
+        boolean success = ftpClient.login(user, pass);
+        if (!success) {
+            System.out.println("Could not login to the server");
+            return;
+        }
+        // Creates a directory
+        String dirToCreate = "upload/test12345";
+        success = ftpClient.makeDirectory(dirToCreate);
+        if (success) {
+            System.out.println("Successfully created directory: " + dirToCreate);
+        } else {
+            System.out.println("Failed to create directory. See server's reply.");
+        }
+        // logs out
+        ftpClient.logout();
+        ftpClient.disconnect();
+    } catch (IOException ex) {
+        System.out.println("Oops! Something wrong happened");
+        ex.printStackTrace();
+    }
